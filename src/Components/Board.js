@@ -21,7 +21,7 @@ export default class Board extends Component {
     handleOnClick(index, turn) {
 
         const newSquares = this.state.squares.slice();
-        newSquares[index] = turn;
+        newSquares[index] = turn; //adds player's turn to corresponding square
 
         var winner = this.calculateWinner(newSquares);
 
@@ -33,7 +33,7 @@ export default class Board extends Component {
     }
 
     calculateWinner(squares) {
-        const lines = [
+        const lines = [ //winning combos
             [0, 1, 2],
             [3, 4, 5],
             [6, 7, 8],
@@ -54,7 +54,7 @@ export default class Board extends Component {
             }
         }
 
-        if (squares.every(function(el) {
+        if (squares.every(function(el) { //checks if every square is used (board is full)
             let arg = el !== null ? true : false;
             return arg;
         })) {
@@ -78,7 +78,7 @@ export default class Board extends Component {
     render() {
         const indexSquares = [0,1,2,3,4,5,6,7,8];
 
-        var squares = indexSquares.map(function(indexSquare, i) {
+        var squares = indexSquares.map(function(i) {
             return (<Square
                 value={this.state.squares[i]}
                 key={i}
@@ -93,11 +93,12 @@ export default class Board extends Component {
         var row3 = squares.slice(6,9);
         return (
             <div className="top-container">
-                <h1 style={{textAlign: 'center', fontSize: '46px', color: '#fc4b05'}}>Kitchen Mate Tic-Tac-Toe</h1>
+                <h1 style={{textAlign: 'center', fontSize: '46px', color: '#fc4b05'}}>KitchenMate Tic-Tac-Toe</h1>
                 <div>
+                    {/* displays winner */}
                     { this.state.winner != null
                             ? <h3 style={{color: 'green'}} id="Winner">
-                                {this.state.winner !== null ? <span>The Winner is: <b>{this.state.winner}</b></span> : "" }
+                                {this.state.winner !== null ? <span>The Winner is: <b>{this.state.winner}</b></span> : "" } 
                             </h3>
                             : this.state.full ? <h3>There is no Winner!</h3> : <h3>{this.state.xIsNext === true ? "Donut": "Celery"}'s Turn</h3>
                     }
